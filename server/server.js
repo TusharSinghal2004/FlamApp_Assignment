@@ -154,10 +154,10 @@ wss.on('connection', (ws, req) => {
           
           drawingState.addOrUpdateStroke(newStroke);
 
-          broadcastToRoom(currentRoomId, {
+          broadcastToAll(currentRoomId, {
             type: 'stroke-start',
             payload: { stroke: newStroke },
-          }, socketId);
+          });
           break;
         }
 
@@ -169,10 +169,10 @@ wss.on('connection', (ws, req) => {
           const stroke = drawingState.updateStroke(strokeId, point);
 
           if (stroke) {
-            broadcastToRoom(currentRoomId, {
+            broadcastToAll(currentRoomId, {
               type: 'stroke-update',
               payload: { stroke },
-            }, socketId);
+            });
           }
           break;
         }
@@ -186,13 +186,13 @@ wss.on('connection', (ws, req) => {
           const stroke = drawingState.finalizeStroke(strokeId);
 
           if (stroke) {
-            broadcastToRoom(currentRoomId, {
+            broadcastToAll(currentRoomId, {
               type: 'stroke-end',
               payload: {
                 stroke,
                 ...drawingState.getHistoryState(),
               },
-            }, socketId);
+            });
           }
           break;
         }

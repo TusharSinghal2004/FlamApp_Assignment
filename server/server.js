@@ -154,7 +154,7 @@ wss.on('connection', (ws, req) => {
           
           drawingState.addOrUpdateStroke(newStroke);
 
-          broadcastToAll(currentRoomId, {
+          broadcastToRoomAll(currentRoomId, {
             type: 'stroke-start',
             payload: { stroke: newStroke },
           });
@@ -169,7 +169,7 @@ wss.on('connection', (ws, req) => {
           const stroke = drawingState.updateStroke(strokeId, point);
 
           if (stroke) {
-            broadcastToAll(currentRoomId, {
+            broadcastToRoomAll(currentRoomId, {
               type: 'stroke-update',
               payload: { stroke },
             });
@@ -186,7 +186,7 @@ wss.on('connection', (ws, req) => {
           const stroke = drawingState.finalizeStroke(strokeId);
 
           if (stroke) {
-            broadcastToAll(currentRoomId, {
+            broadcastToRoomAll(currentRoomId, {
               type: 'stroke-end',
               payload: {
                 stroke,

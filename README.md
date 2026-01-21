@@ -14,6 +14,7 @@ A real-time collaborative drawing application where multiple users can draw simu
 - **Demo Mode**: Works without server (single-user mode) for testing frontend
 - **Multi-room Support**: Different drawing sessions for different rooms
 - **Canvas Mastery**: Efficient path rendering and high-frequency event handling
+- **Local Persistence**: User drawings saved to localStorage and restored on rejoin
 
 ## 🚀 Quick Start
 
@@ -165,10 +166,12 @@ npm run server     # Start WebSocket server
 
 ### Current Limitations
 - **Single Undo Stack**: Global undo/redo (conflicts resolved by operation order)
-- **No Persistence**: Drawing data not saved (clears on server restart)
+- **Server Persistence**: Drawing data stored in-memory (clears on server restart)
+- **Client Persistence**: Individual user drawings saved to localStorage (survives page refresh)
 - **In-Memory Only**: No database backend
 - **Limited Colors**: 8 predefined user colors
 - **No Authentication**: Room IDs are public
+- **Network Latency**: Free hosting tier may have 1-2 second delays for real-time sync
 
 ### Potential Improvements
 - Add drawing persistence to MongoDB/PostgreSQL

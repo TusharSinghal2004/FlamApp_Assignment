@@ -66,7 +66,7 @@ Canvas rendering logic - draws strokes with smooth curves.
 
 ### `/src/hooks/useWebSocket.ts`
 
-WebSocket connection management. Falls back to "demo mode" if server unavailable.
+WebSocket connection management. Falls back to "demo mode" if server unavailable. Implements localStorage persistence for user drawings - saves strokes per username and restores on rejoin.
 
 ## Server Components
 

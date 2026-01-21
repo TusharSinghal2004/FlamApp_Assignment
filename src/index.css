@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 16% 12%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 16% 16%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 16% 14%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 199 89% 48%;
+    --primary-foreground: 220 16% 8%;
+
+    --secondary: 220 16% 22%;
+    --secondary-foreground: 210 20% 95%;
+
+    --muted: 220 16% 20%;
+    --muted-foreground: 215 16% 55%;
+
+    --accent: 280 70% 55%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 98%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 210 20% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 220 16% 8%;
+
+    --border: 220 16% 25%;
+    --input: 220 16% 20%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.75rem;
+
+    /* Canvas specific */
+    --canvas-bg: 220 16% 8%;
+    --toolbar-bg: 220 16% 14%;
+    --cursor-indicator: 199 89% 48%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(280 70% 55%));
+    --gradient-toolbar: linear-gradient(180deg, hsl(220 16% 16%), hsl(220 16% 12%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsla(0, 0%, 0%, 0.4);
+    --shadow-glow: 0 0 20px hsla(199, 89%, 48%, 0.3);
+  }
+
+  .dark {
+    --background: 220 16% 12%;
+    --foreground: 210 20% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-toolbar {
+    background: var(--gradient-toolbar);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .cursor-crosshair-custom {
+    cursor: crosshair;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+}
+
+/* Canvas cursor styles */
+.canvas-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.remote-cursor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+  transition: transform 0.1s ease-out;
+}
+
+.cursor-pointer-shape {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 16px solid currentColor;
+  transform: rotate(-30deg);
+  transform-origin: top left;
+}
+
+.cursor-label {
+  position: absolute;
+  top: 14px;
+  left: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: white;
+}
+
+/* Tool button active state */
+.tool-active {
+  @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
+}
+
+/* Animation keyframes */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsla(199, 89%, 48%, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px hsla(199, 89%, 48%, 0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}

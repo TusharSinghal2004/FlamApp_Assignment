@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: flam-app-client
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    routes:
+      - path: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_WS_SERVER_URL
+        scope: build
+        value: wss://flam-app-server.onrender.com
+
+  - type: web
+    name: flam-app-server
+    env: node
+    region: ohio
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && node server.js
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: https://flam-app-client.onrender.com
